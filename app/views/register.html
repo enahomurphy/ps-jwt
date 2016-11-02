@@ -17,7 +17,7 @@
               placeholder="verify password" class="form-control" ng-model="verify_password" name="verify_password"  validate-match="password" required>
       <p class="help-block" ng-show="register.verify_password.$dirty && register.verify_password.$invalid">please enter a valid password</p>
 
-      <input type="submit"  ng-disabled="register.$invalid " value="register" class="form-control btn-primary" >
+      <input type="submit"  ng-disabled="register.$invalid " value="register" ng-click="submit()" class="form-control btn-primary" >
     </form>
 
   </div>

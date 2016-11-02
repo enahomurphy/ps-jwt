@@ -1,6 +1,6 @@
 # ps-jwt
 
-simple jobs app for mastering authenticatuion in mean.
+simple jobs app for mastering authentication in mean.
 
 ## Build & development
 
