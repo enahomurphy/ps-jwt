@@ -16,7 +16,7 @@ angular.module('psJwtApp')
 
         $http.post(url, $scope.user)
           .success(function(response){
-            // authToken.setToken(response.data.to)
+            authToken.setToken(response.token)
             console.log(response)
             alert('succed', 'u have been registered', 'success', true)
           })

@@ -1,12 +1,16 @@
-<div class="jumbotron">
-  <h3>WELCOME TO THE JOB FINDING APP</h3>
-  <p>login to get started</p>
-  <div class="row">
-    <div class="col-md-6 col-sm-6 col-xs-6">
-      <a class="btn btn-success pull-right" href="#">Login</a>
-    </div>
-    <div class="col-md-6 col-xs-6">
-      <a class="btn btn-primary pull-left" href="#">Register</a>
+<div ng-controller="HeaderCtrl">
+  <div class="jumbotron">
+    <h3>WELCOME TO THE JOB FINDING APP</h3>
+    <p>get started</p>
+    <div class="row">
+      <span ng-hide="isAuthenticated">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <a class="btn btn-success pull-right" href="#">Login</a>
+        </div>
+        <div class="col-md-6 col-xs-6">
+          <a class="btn btn-primary pull-left" href="#">Register</a>
+        </div>
+      </span>
     </div>
   </div>
 </div>

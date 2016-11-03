@@ -12,7 +12,7 @@ angular.module('psJwtApp')
       var cachedToken = null;
       var setToken = function (token) {
         cachedToken  = token;
-        $window.localStorage.setItem('token', cached);
+        $window.localStorage.setItem('token', token);
       }
 
       var getToken = function() {
@@ -25,9 +25,13 @@ angular.module('psJwtApp')
         return !!getToken()
       }
 
+      var unAuthenticate = function() {
+        $window.localStorage.removeItem('token')
+      }
       return {
         setToken: setToken,
         getToken: getToken,
-        isAuthenticated: isAuthenticated
+        isAuthenticated: isAuthenticated,
+        unAuthenticate: unAuthenticate
       }
   });

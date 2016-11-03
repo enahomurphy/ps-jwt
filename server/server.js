@@ -10,7 +10,7 @@ var express = require('express'),
 
 app.use(morgan())
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extend: false }))
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(function(req, res, next) {
     res.header('Access-control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Method', 'GET,POST,PUT,DELETE');
