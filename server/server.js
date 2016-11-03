@@ -46,10 +46,15 @@ var jobs = [
     'ADB Network Engineer Job'
 ]
 app.get('/jobs', function(req, res) {
-    console.log(req.headers)
     if(!req.headers.authorization)
         return res.status(401).send({ message: 'unauthorize: unable to access this route' })
-    console.log(jobs)
+    console.log(req.headers.authorization)
+    
+
+    payload = jwt.decode(req.headers.authorization, 'hjlugausdgfuasudfajdfjabdjfbjasbdfjbadjkfckj')
+    // console.log(payload)
+    if(!payload.iss) 
+        return res.status(401).json({ message: 'unauthorize: unable to access this route' })
     return res.send(jobs)
 })
 
@@ -59,3 +64,6 @@ mongoose.connect('mongodb://127.0.0.1/pjwt', function(err) {
     console.log('whala we are connected');
 })
 app.listen(process.env.PORT || 3000);
+
+// var f = jwt.decode('eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsb2NhbGhvc3QiLCJzdWIiOiI1ODFiNDAxNmU1MTg1OTAzYWNlODAwNmUifQ==.AglBCnT8+uttYkIidOQaM88IIxbsARDilsPO7rLZxjI=', 'hjlugausdgfuasudfajdfjabdjfbjasbdfjbadjkfckj')
+// console.log(f)
