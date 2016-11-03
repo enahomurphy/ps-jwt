@@ -10,9 +10,9 @@ var userShema = mongoose.Schema({
 userShema.pre('save', function(next){
     var self = this
     if(!self.isModified('password')) return next()
-    bycrypt.hash(this.password, null, null, function(err,hash){
+    bcrypt.hash(self.password, null, null, function(err,hash){
         if(err) return next(err)
-        this.password = hash
+        self.password = hash
         next()
     } )
 })

@@ -1,6 +1,7 @@
-/node_modules
-/dist
-/.tmp
-/.sass-cache
-/bower_components
+/frontend/node_modules
+/frontend/dist
+/frontend/.tmp
+/frontend/.sass-cache
+/frontend/bower_components
 .idea
+/server/node_modules

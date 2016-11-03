@@ -50,7 +50,7 @@
     </div>
 
     <div class="container">
-      <div class="alert alert-{{ alert-type}} animated main-alert" ng-class="{'flipInY': alert.show, 'flipOutY': !alert.show, 'alert-hidden': !alert.hasBeenHidden }">
+      <div class="alert alert-{{ alert.type }} animated main-alert" ng-class="{'flipInY': alert.show, 'flipOutY': !alert.show, 'alert-hidden': !alert.hasBeenHidden }">
           <strong>{{ alert.title }}</strong> {{ alert.message }}
       </div>
       <ui-view></ui-view>
@@ -81,6 +81,7 @@
         <script src="scripts/services/alert.js"></script>
         <script src="scripts/controllers/register.js"></script>
         <script src="scripts/services/register.js"></script>
+        <script src="scripts/services/authtoken.js"></script>
         <!-- endbuild -->
 </body>
 </html>

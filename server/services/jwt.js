@@ -6,8 +6,8 @@ exports.encode = function(payload, secrete) {
         typ: 'jwt',
         alg: algorithm
     }
-    var jwt = base64UrlEncode(header)+'.'+base64UrlEncode(payload)
-        jwt += "."+sign(jwt)
+    var jwt = base64UrlEncode(JSON.stringify(header))+'.'+base64UrlEncode(JSON.stringify(payload))
+        jwt += "."+sign(jwt, secrete)
 
         return jwt
 }

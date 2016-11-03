@@ -147,8 +147,13 @@ body {
 }
 .main-alert {
   text-align: center;
-  background-color: mediumseagreen;
 }
 .alert-hidden {
   visibility: hidden;
+}
+.alert-success {
+  background-color: mediumseagreen;
+}
+.alert-error {
+  background-color: mediumvioletred;
 }
