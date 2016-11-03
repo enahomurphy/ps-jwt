@@ -1,7 +1,9 @@
 'use strict';
+
 (function(){
     psJwtApp
-    .config(function ($stateProvider)  {
+    .constant('APP_URL', 'http://localhost:3000')
+    .config(function ($stateProvider, $httpProvider)  {
       $stateProvider
         .state({
             'name' : 'home',
@@ -14,5 +16,20 @@
             'templateUrl': '../views/register.html',
             'controller': 'RegisterctrlCtrl'
         })
+         .state({
+            'name' : 'jobs',
+            'url': '/jobs',
+            'templateUrl': '../views/jobs.html',
+            'controller': 'JobsCtrl'
+        })
+        .state({
+            'name': 'logout',
+            'url': '/logout',
+            'controller': 'LogoutCtrl'
+        });
+
+
+        $httpProvider.interceptors.push('authInterceptor')
+
     });
 })()

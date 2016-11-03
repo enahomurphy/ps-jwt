@@ -18,20 +18,21 @@ angular.module('psJwtApp')
       var getToken = function() {
         if(!cachedToken)
             cachedToken = $window.localStorage.getItem('token');
-        return cachedToken
+        return cachedToken;
       }
 
       var isAuthenticated = function() {
-        return !!getToken()
+        return !!getToken();
       }
 
-      var unAuthenticate = function() {
-        $window.localStorage.removeItem('token')
+      var removeToken = function() {
+        cachedToken = null;
+        $window.localStorage.removeItem('token');
       }
       return {
         setToken: setToken,
         getToken: getToken,
         isAuthenticated: isAuthenticated,
-        unAuthenticate: unAuthenticate
+        removeToken: removeToken
       }
   });

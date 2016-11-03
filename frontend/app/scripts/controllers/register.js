@@ -8,7 +8,10 @@
  * Controller of the psJwtApp
  */
 angular.module('psJwtApp')
-  .controller('RegisterctrlCtrl', function ($scope, $http, alert, authToken) {
+  .controller('RegisterctrlCtrl', function ($scope, $http, alert, authToken, $timeout, $state) {
+
+
+      console.log($state)
 
       $scope.submit = function() {
 

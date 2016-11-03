@@ -40,7 +40,18 @@ app.post('/register', function(req, res) {
 
 })
 
-
+var jobs = [	
+    'UN Information Systems Officer Job',
+    'Sales Executive Jobs NCR',
+    'ADB Network Engineer Job'
+]
+app.get('/jobs', function(req, res) {
+    console.log(req.headers)
+    if(!req.headers.authorization)
+        return res.status(401).send({ message: 'unauthorize: unable to access this route' })
+    console.log(jobs)
+    return res.send(jobs)
+})
 
 
 mongoose.connect('mongodb://127.0.0.1/pjwt', function(err) {

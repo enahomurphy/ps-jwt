@@ -10,10 +10,9 @@
 angular.module('psJwtApp')
   .controller('HeaderCtrl', function ($scope, $location, authToken) {
 
-    $scope.isAuthenticated = authToken.isAuthenticated()
-    
-    $scope.logout = function() {
-      authToken.unAuthenticate()
-       $location.url('/')
-    }
+      $scope.isAuthenticated = function() {
+        return authToken.isAuthenticated()
+      }
+
+      $scope.$watch($scope.isAuthenticated, $scope.isAuthenticated)
   });

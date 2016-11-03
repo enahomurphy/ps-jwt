@@ -3,12 +3,12 @@
     <h3>WELCOME TO THE JOB FINDING APP</h3>
     <p>get started</p>
     <div class="row">
-      <span ng-hide="isAuthenticated">
+      <span ng-hide="isAuthenticated()">
         <div class="col-md-6 col-sm-6 col-xs-6">
-          <a class="btn btn-success pull-right" href="#">Login</a>
+          <a class="btn btn-success pull-right" ui-sref="#/login">Login</a>
         </div>
         <div class="col-md-6 col-xs-6">
-          <a class="btn btn-primary pull-left" href="#">Register</a>
+          <a class="btn btn-primary pull-left" href="#/register">Register</a>
         </div>
       </span>
     </div>
