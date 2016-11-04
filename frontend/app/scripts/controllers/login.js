@@ -14,7 +14,7 @@ angular.module('psJwtApp')
         })
     }
 
-    $scope.test = function () {
-      console.log('i go clicked')
+    $scope.gooleAuthenticate = function () {
+        auth.googleAuth()
     }
 });
