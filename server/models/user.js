@@ -1,11 +1,13 @@
 var mongoose = require('mongoose'),
     bcrypt = require('bcrypt-nodejs')
+    mongoose.Promise = require('bluebird')
 
 var userShema = mongoose.Schema({
     name : { type: String, required: true},
-    username: {type: String, required: true, uniqu: true},
+    username: {type: String, default: ""},
     email: {type: String, required: true, unique: true},
-    password: {type: String, required: true}
+    googleId: { type: String, unique: true, default: ""},
+    password: {type: String}
 })
 
 userShema.pre('save', function(next){

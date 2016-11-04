@@ -15,6 +15,10 @@ angular.module('psJwtApp')
     }
 
     $scope.gooleAuthenticate = function () {
-        auth.googleAuth()
+        auth.googleAuth().then(function(res) {
+          alert('success', 'Welcome back '+res.user.name, 'success', true)
+        }).catch(function(err) {
+          alert('failed', 'invalid username/password', 'error', true)
+        })
     }
 });

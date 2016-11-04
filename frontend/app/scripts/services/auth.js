@@ -2,7 +2,7 @@
 
 
 angular.module('psJwtApp')
-  .service('auth', function ($http, APP_URL, authToken, $state, $window) {
+  .service('auth', function ($http, APP_URL, authToken, $state, $window, $q) {
 
     function login (email, password) {
       return $http.post(APP_URL + 'login', {email:email, password: password})
@@ -26,29 +26,32 @@ angular.module('psJwtApp')
           parameter = 'scope=email%20profile&'
           parameter += 'response_type=code&',
           parameter +=  'redirect_uri=http://localhost:9000&',
-          parameter +=  'client_id=57578836164-6b7l5tsqtea2aluh5bksp4g6rtse9l6t.apps.googleusercontent.com'  
+          parameter +=  'client_id=57578836164-6b7l5tsqtea2aluh5bksp4g6rtse9l6t.apps.googleusercontent.com'
+      var deferred = $q.defer() 
 
 
           var popup =  $window.open(url+parameter, '' , options)
           popup.focus()
           $window.addEventListener('message', function(event) {
               if(event.origin === $window.location.origin){
-                console.log(event.data)
+                if(event.data) {
                     var params = {
                       code : event.data,
                       client_id	: '57578836164-6b7l5tsqtea2aluh5bksp4g6rtse9l6t.apps.googleusercontent.com',
                       redirect_uri: 'http://localhost:9000',
                       grant_type: 'authorization_code',
                     }
-
                     $http.post(APP_URL+'auth/google', params)
-                      .then(function(err) {
-                        console.log(err)
-                      }, function (err) { 
-                          console.log(err)
+                      .success(function(res) {
+                        console.log(res)
+                        authToken.setToken(res.token)
+                        deferred.resolve(res)
                       })
+                    popup.close()
+              }
               }
           })
+          return deferred.promise
     }
     
     return {
