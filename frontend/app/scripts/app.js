@@ -3,7 +3,7 @@ var psJwtApp;
 (function () {
  
   psJwtApp = angular
-    .module('psJwtApp', ['ui.router'])
+    .module('psJwtApp', ['ui.router', 'satellizer'])
     .run(function($window){
       var params = $window.location.search.substring(1);
 
