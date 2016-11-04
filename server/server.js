@@ -3,13 +3,15 @@ var express = require('express'),
     mongoose = require('mongoose'),
     bodyParser = require('body-parser'),
     morgan = require('morgan'),
-
+    passport = require('passport'),
+    localStrategy = require('passport-local').Strategy
 
     User = require('./models/user'),
     jwt = require('./services/jwt')
 
 app.use(morgan())
 app.use(bodyParser.json());
+app.use(passport.initialize())
 app.use(bodyParser.urlencoded({
     extended: false
 }))
@@ -19,6 +21,32 @@ app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Headers', 'Content-type, Authorization');
     next()
 })
+
+
+passport.serializeUser(function(user, done) {
+    return done(null, user.id)
+})
+
+
+
+passport.use(new localStrategy({
+    usernameField : 'email'
+}, function (username, password, done) {
+    //console.log(username, password)
+    User.findOne({ email: username }, function (err, user) {
+        if (err) return done(err)
+       
+        if (!user)
+            return  done(null, false, {message: 'invalid email/password'})
+        user.comparePassword(password, function(isValid){
+            if(!isValid)
+                return done(null, false, {message: 'invalid email/password'})
+           return  done(null, user)
+        })
+        
+    })
+}))
+
 
 var jobs = [
     'UN Information Systems Officer Job',
@@ -65,29 +93,8 @@ app.get('/jobs', function (req, res) {
         })
     return res.send(jobs)
 })
-app.post('/login', function (req, res) {
-    console.log(req.body)
-    email = req.body.email;
-    password = req.body.password;
-    if (!email || !password)
-        return res.status(400).json({
-            message: 'invalid email/password'
-        })
-
-    User.findOne({ email: email }, function (err, data) {
-        if (err) throw err
-        if (!data)
-            return res.status(400).json({ message: 'invalid email/password'});
-       // console.log(data.comparePassword(password))
-        data.comparePassword(password, function(status){
-            console.log(status)
-            if(!status)
-                return res.status(400).json({ message: 'invalid email/password' })
-            createToken(res, data)
-        })
-        
-
-    })
+app.post('/login',  passport.authenticate('local') , function (req, res, next) {
+    createToken(res, req.user)
 })
 
 mongoose.connect('mongodb://127.0.0.1/pjwt', function (err) {
