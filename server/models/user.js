@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
     bcrypt = require('bcrypt-nodejs')
+
 var userShema = mongoose.Schema({
     name : { type: String, required: true},
     username: {type: String, required: true, uniqu: true},
@@ -16,7 +17,14 @@ userShema.pre('save', function(next){
         next()
     } )
 })
+userShema.methods.comparePassword = function(password, cb) {
 
+   return  bcrypt.compare(password, this.password, function(err, res) {
+        if (err) throw err
+        // console.log(res)
+        cb(res)
+    })
+}
 userShema.methods.toJson = function(){
     user = this.toObject()
     delete user.password

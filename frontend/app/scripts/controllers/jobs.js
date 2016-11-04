@@ -16,7 +16,7 @@ angular.module('psJwtApp')
     // ];
     $scope.jobs = []
 
-    $http.get(APP_URL+'/jobs')
+    $http.get(APP_URL+'jobs')
       .success(function(res) {
           $scope.jobs = res
           console.log(res, APP_URL+'/jobs')

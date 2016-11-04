@@ -1,12 +1,6 @@
 'use strict';
 
-/**
- * @ngdoc service
- * @name psJwtApp.authInterceptor
- * @description
- * # authInterceptor
- * Service in the psJwtApp.
- */
+
 angular.module('psJwtApp')
   .service('authInterceptor', function (authToken) {
       return {

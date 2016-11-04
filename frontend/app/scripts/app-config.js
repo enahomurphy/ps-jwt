@@ -2,7 +2,7 @@
 
 (function(){
     psJwtApp
-    .constant('APP_URL', 'http://localhost:3000')
+    .constant('APP_URL', 'http://localhost:3000/')
     .config(function ($stateProvider, $httpProvider)  {
       $stateProvider
         .state({
@@ -15,6 +15,12 @@
             'url': '/register',
             'templateUrl': '../views/register.html',
             'controller': 'RegisterctrlCtrl'
+        })
+         .state({
+            'name' : 'login',
+            'url': '/login',
+            'templateUrl': '../views/login.html',
+            'controller': 'LoginCtrl'
         })
          .state({
             'name' : 'jobs',

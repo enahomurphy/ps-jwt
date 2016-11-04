@@ -18,6 +18,10 @@
       <p class="help-block" ng-show="register.verify_password.$dirty && register.verify_password.$invalid">please enter a valid password</p>
 
       <input type="submit"  ng-disabled="register.$invalid " value="register" ng-click="submit()" class="form-control btn-primary" >
+
+      <p class="pull-right"><a ui-sref="login">Login</a></p>
+        
+      <input type="button"  ng-click="google()" class="form-control btn-primary" value="Login With Google">
     </form>
 
   </div>

@@ -1,0 +1,17 @@
+
+<row>
+  <div class="col-md-6 col-md-offset-3">
+    <h2 class="text-center">Login</h2>
+    <form name="login" ng-submit="authenticate()" novalidate>      
+      <input type="email" name="email" placeholder="email" class="form-control" ng-model="email" required>
+      <p class="help-block" ng-show="login.email.$dirty && login.email.$invalid">please enter a valid email</p>
+
+      <input type="password" name="password" placeholder="password" class="form-control" ng-model="password" required>
+      <input type="submit"  ng-disabled="login.$invalid " value="Login" class="form-control btn-primary" >
+      <br>
+      <p class="pull-right"><a ui-sref="register">Create An Account</a></p>
+        
+      <input type="button"  ng-click="google()" class="form-control btn-primary" value="Login With Google">
+    </form>
+  </div>
+</row>
