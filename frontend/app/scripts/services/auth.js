@@ -2,20 +2,27 @@
 
 
 angular.module('psJwtApp')
-  .service('auth', function ($http, APP_URL, authToken) {
+  .service('auth', function ($http, APP_URL, authToken, $state) {
 
-    function login(email, password) {
-      var url = APP_URL + 'login'
+    function login (email, password) {
       console.log(email, password)
-      return $http.post(url, {email:email, password: password})
-        .success(function (response) {
-          authToken.setToken(response.token)
-          //return response
-        })
+      return $http.post(APP_URL + 'login', {email:email, password: password})
+        .success(successFunc)
     }
 
+    function register (data) {
+        return $http.post(APP_URL+'register', data).success(successFunc)
+    }
+
+    function successFunc (response) {
+      authToken.setToken(response.token)
+      $state.go('home')
+    }
+
+    
     return {
-      login: login
+      login: login,
+      register: register
     }
 
   
