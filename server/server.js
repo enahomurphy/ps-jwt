@@ -47,7 +47,26 @@ passport.use(new localStrategy({
     })
 }))
 
+passport.use('register', new localStrategy({
+    passReqToCallback: true
+},function(req, username, password, done){
+    email = req.body.email;
+    if(!email) return done(null, false ,{ message: 'please fill in all fields'});
 
+    User.findOne({email: email}, function(err, user){
+        if(err) return done(err);
+        if(user) return done(null, false, { message: "user with that email already exist"});
+        console.log(req.body)
+        var newUser = new User(req.body)
+        newUser.save(function(err) {
+            if(err) return done(err);
+
+            return done(null, newUser)
+        })
+    })
+
+
+}))
 var jobs = [
     'UN Information Systems Officer Job',
     'Sales Executive Jobs NCR',
@@ -57,7 +76,7 @@ var jobs = [
 var createToken = function (res, user) {
 
     var payload = {
-        sub: user.id
+        sub: user._id
     }
     var token = jwt.encode(payload, 'hjlugausdgfuasudfajdfjabdjfbjasbdfjbadjkfckj');
     return res.send({
@@ -70,13 +89,15 @@ app.get('/users', function (req, res) {
     return res.send('hello world')
 })
 
-app.post('/register', function (req, res) {
+app.post('/register', passport.authenticate('register',{ failWithError: true }), function (req, res) {
+
+    createToken(res, req.user)
     //console.log(req.body)
-    var user = new User(req.body);
-    user.save(function (err, data) {
-        if (err) return res.status(400).send(err.message);
-        createToken(res, user)
-    })
+    // var user = new User(req.body);
+    // user.save(function (err, data) {
+    //     if (err) return res.status(400).send(err.message);
+    //     createToken(res, user)
+    // })
 
 })
 app.get('/jobs', function (req, res) {
