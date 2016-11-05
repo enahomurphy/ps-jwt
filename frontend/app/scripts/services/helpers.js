@@ -10,9 +10,9 @@ angular.module('psJwtApp')
       }, time || 3000)
     }
 
-    var authenticated = function() {
+    var authenticated = function(location) {
       if (authToken.isAuthenticated())
-            redirect('jobs', 1)
+            redirect(location || 'jobs' , 1)
     }
 
 

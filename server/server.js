@@ -5,7 +5,8 @@ var express = require('express'),
     morgan = require('morgan'),
     passport = require('passport'),
     localStrategy = require('passport-local').Strategy,
-    request = require('request')
+    request = require('request'),
+    moment = require('moment'),
 
     User = require('./models/user'),
     jwt = require('./services/jwt')
@@ -77,9 +78,11 @@ var jobs = [
 var createToken = function (res, user) {
 
     var payload = {
-        sub: user._id
+        sub: user._id,
+        exp: moment().add(10, 'days').unix()
     }
     var token = jwt.encode(payload, 'hjlugausdgfuasudfajdfjabdjfbjasbdfjbadjkfckj');
+    console.log(token)
     return res.send({
         user: user.toJson(),
         token: token
@@ -95,11 +98,12 @@ app.post('/register', passport.authenticate('register',{ failWithError: true }),
 })
 
 app.get('/jobs', function (req, res) {
+    console.log(req.headers.authorization)
     if (!req.headers.authorization)
         return res.status(401).send({
-            message: 'unauthorize: unable to access this route'
+            message: 'unauthorize: unable to access this ieieiei'
         })
-
+    console.log(req.headers.authorization)
     payload = jwt.decode(req.headers.authorization, 'hjlugausdgfuasudfajdfjabdjfbjasbdfjbadjkfckj')
     console.log(payload)
     if (!payload.sub)
@@ -113,13 +117,14 @@ app.post('/login',  passport.authenticate('local') , function (req, res, next) {
 })
 
 app.post('/auth/google', function(req, res) {
+    console.log(req.body)
     var url = 'https://www.googleapis.com/oauth2/v4/token',
         googlePlus= 'https://www.googleapis.com/plus/v1/people/me' 
         query = {
         code : req.body.code,
-        client_id	: req.body.client_id,
-        redirect_uri: req.body.redirect_uri,
-        client_secret: '1Tp09cHWzYsuROS9oATfzHN-',
+        client_id	: req.body.clientId,
+        redirect_uri: req.body.redirectUri,
+        client_secret: 'iRg4wldj4NPku7Q08S6YaBPg',
         grant_type: 'authorization_code',
     }
 
@@ -127,7 +132,7 @@ app.post('/auth/google', function(req, res) {
         var val = JSON.parse(body)
         if(val.access_token){
 
-            console.log(val.access_token)
+            console.log(val)
             var token = body['access_token'],
             headers = {
                 'Authorization': 'Bearer '+ val.access_token

@@ -11,7 +11,7 @@ angular.module('psJwtApp')
 
     var getToken = function () {
       if (!cachedToken)
-        cachedToken = $window.localStorage.getItem('token');
+        cachedToken = $window.localStorage.getItem('satellizer_token');
       return cachedToken;
     }
 
@@ -21,7 +21,7 @@ angular.module('psJwtApp')
 
     var removeToken = function () {
       cachedToken = null;
-      $window.localStorage.removeItem('token');
+      $window.localStorage.removeItem('satellizer_token');
     }
 
    

@@ -7,9 +7,9 @@ angular.module('psJwtApp')
         request: function(config) {
           var token = authToken.getToken();
           if(token)
-              config.headers['authorization'] = 'Bearer ' + token
+              config.headers.Authorization = 'Bearer ' + token
 
-          console.log(config.headers, token)
+            console.log(config.headers)
             return config
         },
 

@@ -1,14 +1,13 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name psJwtApp.controller:LogoutCtrl
- * @description
- * # LogoutCtrl
- * Controller of the psJwtApp
- */
 angular.module('psJwtApp')
-  .controller('LogoutCtrl', function ($state, authToken) {
-    authToken.removeToken()
-    $state.go('home')
+  .controller('LogoutCtrl', function (helpers,$scope, $auth, authToken) {
+    
+    $scope.logout  = function() {
+      authToken.removeToken()
+    }
+
+    $scope.$watch($scope.logout, $scope.logout)
+
+    helpers.redirect('home')
   });

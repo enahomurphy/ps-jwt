@@ -13,6 +13,7 @@ exports.encode = function(payload, secrete) {
 }
 exports.decode = function(token, secrete) {
     var rawToken = token.split(' ')
+    console.log(rawToken)
     if (rawToken.length !== 2 )
         throw new Error('Authentication failed invalid token') 
 

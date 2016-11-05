@@ -3,7 +3,7 @@
 (function(){
     psJwtApp
     .constant('APP_URL', 'http://localhost:3000/')
-    .config(function ($stateProvider, $httpProvider)  {
+    .config(function ($stateProvider, $httpProvider, $authProvider, APP_URL)  {
       $stateProvider
         .state({
             'name' : 'home',
@@ -34,7 +34,7 @@
             'controller': 'LogoutCtrl'
         });
 
-
+       
         $httpProvider.interceptors.push('authInterceptor')
 
     });

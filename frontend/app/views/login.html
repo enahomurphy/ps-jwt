@@ -2,7 +2,7 @@
 <row>
   <div class="col-md-6 col-md-offset-3">
     <h2 class="text-center">Login</h2>
-    <form name="login" ng-submit="authenticate()" novalidate>      
+    <form name="login" ng-submit="submit()" novalidate>      
       <input type="email" name="email" placeholder="email" class="form-control" ng-model="email" required>
       <p class="help-block" ng-show="login.email.$dirty && login.email.$invalid">please enter a valid email</p>
 
@@ -11,7 +11,8 @@
       <br>
       <p class="pull-right"><a ui-sref="register">Create An Account</a></p>
         
-      <input type="button"  ng-click="gooleAuthenticate()" class="form-control btn-primary" value="Login With Google">
+      <input type="button"  ng-click="authenticate('google')" class="form-control btn-google" value="signin With Google">
+      <input type="button"  ng-click="authenticate('facebook')" class="form-control btn-facebook" value="signin With facebook">
     </form>
   </div>
 </row>
