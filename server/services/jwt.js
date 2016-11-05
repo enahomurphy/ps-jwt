@@ -1,13 +1,15 @@
 var crypto = require('crypto'),
-    jwt = require('jwt-simple')
-    moment = require('moment')
+    jwt = require('jwt-simple'),
+    moment = require('moment'),
+    config = require('./config')
+    
 
 exports.createToken = function (res, user) {
     var payload = {
         sub: user._id,
         exp: moment().add(10, 'days').unix()
     }
-    var token = jwt.encode(payload, 'hjlugausdgfuasudfajdfjabdjfbjasbdfjbadjkfckj');
+    var token = jwt.encode(payload, config.APP_SECRETE);
     console.log(token)
     return res.status(200).json({
         user: user.toJson(),

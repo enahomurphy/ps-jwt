@@ -1,4 +1,6 @@
-var jwt = require('jwt-simple')
+var jwt = require('jwt-simple'),
+    config = require('./config')
+
 module.exports = function (req, res) {
     var rawToken = req.headers.authorization
     if (!rawToken)
@@ -6,7 +8,7 @@ module.exports = function (req, res) {
             message: 'unauthorize: unable to access this ieieiei'
         })
     token = rawToken.split(' ')
-    payload = jwt.decode(token[1], 'hjlugausdgfuasudfajdfjabdjfbjasbdfjbadjkfckj')
+    payload = jwt.decode(token[1], config.APP_SECRETE)
         // console.log(payload)
     if (!payload.sub)
         return res.status(401).json({

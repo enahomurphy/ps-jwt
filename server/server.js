@@ -10,7 +10,9 @@ var express = require('express'),
     createToken = require('./services/jwt').createToken,
     googleAuth = require('./services/googleAuth'),
     jobs = require('./services/jobs'),
-    passportStrategy = require('./services/passportStrategy')
+    passportStrategy = require('./services/passportStrategy'),
+    emailVerify = require('./services/emailVerify')
+    
 
 app.use(morgan())
 app.use(bodyParser.json());
@@ -37,8 +39,9 @@ app.get('/users', function (req, res) {
     return res.send('hello world')
 })
 
-app.post('/register', passport.authenticate('register',{ failWithError: true }), function (req, res) {
+app.post('/register', passport.authenticate('register', {failWithError : true}), function (req, res) {
     console.log(req.user)
+    emailVerify.send(req.user.email)
     createToken(res, req.user)
 })
 

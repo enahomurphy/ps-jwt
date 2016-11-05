@@ -1,15 +1,16 @@
 var User = require('../models/user'),
-    request = require('request')
+    request = require('request'),
+    config = require('./config')
     
 module.exports = function(req, res) {
-    console.log(req.body)
+    console.log(req.body, config)
     var url = 'https://www.googleapis.com/oauth2/v4/token',
         googlePlus= 'https://www.googleapis.com/plus/v1/people/me' 
         query = {
         code : req.body.code,
         client_id	: req.body.clientId,
         redirect_uri: req.body.redirectUri,
-        client_secret: 'iRg4wldj4NPku7Q08S6YaBPg',
+        client_secret: config.GOOGLE_SECRETE,
         grant_type: 'authorization_code',
     }
     request.post({url:url, form:query }, function(err, response, body) {

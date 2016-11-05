@@ -1,6 +1,7 @@
 var request = require('request'),
     User = require('../models/user')
     createToken = require('./jwt').createToken
+    config = require('./config')
 module.exports = function(req, res) {
 
     console.log(req.body)
@@ -9,7 +10,7 @@ module.exports = function(req, res) {
         tokeQuery = {
             client_id: req.body.clientId,
             redirect_uri: req.body.redirectUri,
-            client_secret: '7d02da4e7ee105e61f9be2393f60fc9f',
+            client_secret: config.FACEBOOK_SECRETE,
             code: req.body.code
         }
         userQuery = {

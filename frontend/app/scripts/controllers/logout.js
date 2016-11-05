@@ -11,5 +11,5 @@ angular.module('psJwtApp')
 
     $scope.$watch($scope.logout, $scope.logout)
 
-    helpers.redirect('home')
+    helpers.redirect('home', 100)
   });
