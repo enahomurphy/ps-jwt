@@ -12,9 +12,8 @@ var psJwtApp;
       });
 
       $authProvider.facebook({
-        clientId: 'Facebook App ID',
-        url: APP_URL + 'auth/google',
-        redirectUri: 'http://localhost:9000'
+        clientId: '219559031812343',
+        url: APP_URL + 'auth/facebook',
       });
 
       $authProvider.loginUrl = APP_URL + 'login';

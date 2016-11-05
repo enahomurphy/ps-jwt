@@ -9,7 +9,9 @@ var express = require('express'),
     moment = require('moment'),
 
     User = require('./models/user'),
-    jwt = require('./services/jwt')
+    jwt = require('jwt-simple'),
+    facebook = require('./services/facebookAuth'),
+    createToken = require('./services/jwt').createToken
 
 app.use(morgan())
 app.use(bodyParser.json());
@@ -75,20 +77,6 @@ var jobs = [
     'ADB Network Engineer Job'
 ]
 
-var createToken = function (res, user) {
-
-    var payload = {
-        sub: user._id,
-        exp: moment().add(10, 'days').unix()
-    }
-    var token = jwt.encode(payload, 'hjlugausdgfuasudfajdfjabdjfbjasbdfjbadjkfckj');
-    console.log(token)
-    return res.send({
-        user: user.toJson(),
-        token: token
-    })
-}
-
 app.get('/users', function (req, res) {
     return res.send('hello world')
 })
@@ -98,14 +86,14 @@ app.post('/register', passport.authenticate('register',{ failWithError: true }),
 })
 
 app.get('/jobs', function (req, res) {
-    console.log(req.headers.authorization)
-    if (!req.headers.authorization)
+    var rawToken = req.headers.authorization
+    if (!rawToken)
         return res.status(401).send({
             message: 'unauthorize: unable to access this ieieiei'
         })
-    console.log(req.headers.authorization)
-    payload = jwt.decode(req.headers.authorization, 'hjlugausdgfuasudfajdfjabdjfbjasbdfjbadjkfckj')
-    console.log(payload)
+    token = rawToken.split(' ')
+    payload = jwt.decode(token[1], 'hjlugausdgfuasudfajdfjabdjfbjasbdfjbadjkfckj')
+    // console.log(payload)
     if (!payload.sub)
         return res.status(401).json({
             message: 'unauthorize: invalid payload'
@@ -116,6 +104,7 @@ app.post('/login',  passport.authenticate('local') , function (req, res, next) {
     createToken(res, req.user)
 })
 
+app.post('/auth/facebook', facebook)
 app.post('/auth/google', function(req, res) {
     console.log(req.body)
     var url = 'https://www.googleapis.com/oauth2/v4/token',
