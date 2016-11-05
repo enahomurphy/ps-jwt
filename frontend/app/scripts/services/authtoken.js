@@ -6,7 +6,7 @@ angular.module('psJwtApp')
     var cachedToken = null;
     var setToken = function (token) {
       cachedToken = token;
-      $window.localStorage.setItem('token', token);
+      $window.localStorage.setItem('satellizer_token', token);
     }
 
     var getToken = function () {

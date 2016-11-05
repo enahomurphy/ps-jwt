@@ -82,6 +82,7 @@ app.get('/users', function (req, res) {
 })
 
 app.post('/register', passport.authenticate('register',{ failWithError: true }), function (req, res) {
+    console.log(req.user)
     createToken(res, req.user)
 })
 

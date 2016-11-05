@@ -3,6 +3,8 @@
 angular.module('psJwtApp')
   .controller('LogoutCtrl', function (helpers,$scope, $auth, authToken) {
     
+    helpers.authenticated('login')
+
     $scope.logout  = function() {
       authToken.removeToken()
     }
