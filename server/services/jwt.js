@@ -9,7 +9,7 @@ exports.createToken = function (res, user) {
     }
     var token = jwt.encode(payload, 'hjlugausdgfuasudfajdfjabdjfbjasbdfjbadjkfckj');
     console.log(token)
-    return res.send({
+    return res.status(200).json({
         user: user.toJson(),
         token: token
     })
