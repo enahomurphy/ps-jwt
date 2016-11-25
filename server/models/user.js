@@ -6,8 +6,9 @@ var userShema = mongoose.Schema({
     name : { type: String, required: true},
     username: {type: String, default: ""},
     email: {type: String, required: true, unique: true},
-    googleId: { type: String, unique: true, default: ""},
-    facebookId: { type: String, unique: true, default: ""},
+    googleId: { type: String, unique: true},
+    facebookId: { type: String, unique: true},
+    verified: {type: Boolean, default: false},
     password: {type: String}
 })
 

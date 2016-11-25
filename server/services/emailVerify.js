@@ -54,7 +54,6 @@ function getHtml (token, cb) {
 
     fs.readFile('views/emailVerification.html', function (err, html) {
             if (err) throw err
-
             var template = _.template(html.toString())
 
             //console.log(template(model))

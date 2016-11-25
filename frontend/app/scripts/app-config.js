@@ -3,7 +3,8 @@
 (function(){
     psJwtApp
     .constant('APP_URL', 'http://localhost:3000/')
-    .config(function ($stateProvider, $httpProvider, $authProvider, APP_URL)  {
+    .config(function ($stateProvider, $locationProvider, $httpProvider)  {
+    
       $stateProvider
         .state({
             'name' : 'home',
@@ -32,10 +33,25 @@
             'name': 'logout',
             'url': '/logout',
             'controller': 'LogoutCtrl'
-        });
-
-       
+        })
+        .state({
+            'name': 'verify',
+            'url': '/verify',
+            'templateUrl': '../views/verify-email.html',
+            'controller': 'VerifyEmailCtrl'
+        })
+        .state({
+            'name': '404',
+            'url': '/not-found',
+            'templateUrl': '../404.html',
+            'controller': 'VerifyEmailCtrl'
+        })
+        // $stateProvider.otherwise('404')
+        $locationProvider.html5Mode(true);
         $httpProvider.interceptors.push('authInterceptor')
 
-    });
+    })
+    .run(function($browser) {
+         $browser.baseHref = function () { return "/" };
+    })
 })()

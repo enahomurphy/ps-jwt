@@ -5,6 +5,7 @@ var psJwtApp;
   psJwtApp = angular
     .module('psJwtApp', ['ui.router', 'satellizer'])
     .config(function ($authProvider, APP_URL) {
+      
       $authProvider.google({
         clientId: '57578836164-bhv5uruahba3fls072h31s6l0khqof8v.apps.googleusercontent.com',
         url: APP_URL + 'auth/google',
